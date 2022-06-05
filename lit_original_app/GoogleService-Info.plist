@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>131153520446-januta5ai38o7fevuf6o7p0eajfhh71n.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.131153520446-januta5ai38o7fevuf6o7p0eajfhh71n</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCDHDcp9Invwl5QR41TLw6MzxXvBxZHDXo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>131153520446</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>app.ihara.masa.lit-original-app</string>
+	<key>PROJECT_ID</key>
+	<string>lit-original-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lit-original-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:131153520446:ios:12353e00737273fa762e6f</string>
+</dict>
+</plist>
