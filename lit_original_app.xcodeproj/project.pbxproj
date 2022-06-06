@@ -18,6 +18,8 @@
 		176459FE283E642900EE45BA /* BGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176459FD283E642900EE45BA /* BGButton.swift */; };
 		17645A04283E6EE300EE45BA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17645A03283E6EE200EE45BA /* LoginViewController.swift */; };
 		17645A06283E6F4D00EE45BA /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17645A05283E6F4D00EE45BA /* CreateAccountViewController.swift */; };
+		17C7E1B6284C905600053F4B /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C7E1B4284C905600053F4B /* PostTableViewCell.swift */; };
+		17C7E1B7284C905600053F4B /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C7E1B5284C905600053F4B /* PostTableViewCell.xib */; };
 		17D119D628434EF7004D9147 /* UIColor-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D119D528434EF7004D9147 /* UIColor-Extension.swift */; };
 		17D9B56F284A0BB400A6F266 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D9B56E284A0BB400A6F266 /* PostViewController.swift */; };
 		17FA4B282847689E005E8CF7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 17FA4B272847689E005E8CF7 /* FirebaseAuth */; };
@@ -39,6 +41,8 @@
 		176459FD283E642900EE45BA /* BGButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGButton.swift; sourceTree = "<group>"; };
 		17645A03283E6EE200EE45BA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		17645A05283E6F4D00EE45BA /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		17C7E1B4284C905600053F4B /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		17C7E1B5284C905600053F4B /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		17D119D528434EF7004D9147 /* UIColor-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Extension.swift"; sourceTree = "<group>"; };
 		17D9B56E284A0BB400A6F266 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +94,8 @@
 				17108F542845DAF300C4B03B /* GoogleService-Info.plist */,
 				171389992849BE53003A6EF0 /* HomeViewController.swift */,
 				17D9B56E284A0BB400A6F266 /* PostViewController.swift */,
+				17C7E1B4284C905600053F4B /* PostTableViewCell.swift */,
+				17C7E1B5284C905600053F4B /* PostTableViewCell.xib */,
 			);
 			path = lit_original_app;
 			sourceTree = "<group>";
@@ -162,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				176459F6283E4EB800EE45BA /* LaunchScreen.storyboard in Resources */,
+				17C7E1B7284C905600053F4B /* PostTableViewCell.xib in Resources */,
 				17108F552845DAF300C4B03B /* GoogleService-Info.plist in Resources */,
 				176459F3283E4EB800EE45BA /* Assets.xcassets in Resources */,
 				176459F1283E4EB400EE45BA /* Main.storyboard in Resources */,
@@ -182,6 +189,7 @@
 				1713899A2849BE53003A6EF0 /* HomeViewController.swift in Sources */,
 				176459FE283E642900EE45BA /* BGButton.swift in Sources */,
 				17645A04283E6EE300EE45BA /* LoginViewController.swift in Sources */,
+				17C7E1B6284C905600053F4B /* PostTableViewCell.swift in Sources */,
 				17D119D628434EF7004D9147 /* UIColor-Extension.swift in Sources */,
 				176459EC283E4EB400EE45BA /* SceneDelegate.swift in Sources */,
 			);

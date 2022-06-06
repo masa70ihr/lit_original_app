@@ -46,9 +46,17 @@ class Post {
 //    }
 //}
 
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController {
     
-    @IBOutlet weak var homeTableView: UITableView!
+    @IBOutlet weak var homeTableView: UITableView! {
+        didSet {
+            homeTableView.delegate = self
+            homeTableView.dataSource = self
+            //nibNameはCustomCellのクラス名、forCellReuseIdentifierは適当なcellを使うときに判別するkey
+            homeTableView.register(UINib(nibName:"PostTableViewCell", bundle: nil),forCellReuseIdentifier:"PostCell")
+        }
+    }
+    
     var postArray: [Post]!
 //    var option1ButtonArray: [Int] = []
 //    var option2ButtonArray: [Int] = []
@@ -88,79 +96,152 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.homeTableView.reloadData()
         }
     }
+}
     
     
-    
-    
+extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(self.postArray.count)
         return postArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = homeTableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath)
-        
+        let cell = homeTableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
         let post = postArray[indexPath.row]
         
-        let nameLabel = cell.viewWithTag(1) as! UILabel
-        nameLabel.text = post.name
+        cell.nameLabel.text = post.name
         
-        let descriptionLabel = cell.viewWithTag(2) as! UILabel
-        descriptionLabel.text = post.description
+        cell.descriptionLabel.text = post.description
         
-        let option1Button = cell.viewWithTag(3) as! UIButton
-        option1Button.setTitle(post.option[0], for: .normal)
-        option1Button.addTarget(self, action: #selector(option1ButtonTapped(_: )), for: UIControl.Event.touchUpInside)
-//        option1Button.tag = indexPath.row
+        if #available(iOS 15.0, *) {
+            cell.option1Button.configuration = nil
+            cell.option2Button.configuration = nil
+        }
         
-        let option2Button = cell.viewWithTag(4) as! UIButton
-        option2Button.setTitle(post.option[1], for: .normal)
-        option2Button.addTarget(self, action: #selector(option2ButtonTapped(_: )), for: UIControl.Event.touchUpInside)
-//        option2Button.tag = indexPath.row
+        cell.option1Button.setTitle(post.option[0], for: .normal)
+        cell.option1Button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+//        cell.option1Button.addTarget(self, action: #selector(option1ButtonTapped(_: )), for: UIControl.Event.touchUpInside)
+        cell.option1Button.tag = indexPath.row
+        
+        cell.option2Button.setTitle(post.option[1], for: .normal)
+        cell.option2Button.titleLabel!.font = UIFont.boldSystemFont(ofSize: 20)
+//        cell.option2Button.addTarget(self, action: #selector(option2ButtonTapped(_: )), for: UIControl.Event.touchUpInside)
+        cell.option2Button.tag = indexPath.row
+        
+        cell.delegate = self
         
         return cell
     }
     
     @objc func option1ButtonTapped(_ sender: UIButton){
         print("option1ButtonTappedがタップされました", [sender.tag])
+//        updateCountResult(optionButton: sender)
     }
     
     @objc func option2ButtonTapped(_ sender: UIButton){
         print("option2ButtonTappedがタップされました", [sender.tag])
     }
     
-    @IBAction func pushedButton1(sender: UIButton) {
-        //UITableView内の座標に変換
-        let point = homeTableView.convert(sender.center, from: sender)
-        print(point)
-        //座標からindexPathを取得
-        if let indexPath = homeTableView.indexPathForRow(at: point) {
-            print(indexPath.row)
-        } else {
-            //ここには来ないはず
-            print("not found...")
-        }
-    }
-    
-    @IBAction func pushedButton2(sender: UIButton) {
-        //UITableView内の座標に変換
-        let point = homeTableView.convert(sender.center, from: sender)
-        print(point)
-        //座標からindexPathを取得
-        if let indexPath = homeTableView.indexPathForRow(at: point) {
-            print(indexPath.row)
-        } else {
-            //ここには来ないはず
-            print("not found...")
-        }
-    }
-    
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//            return 241
+//    private  func updateCountResult(optionButton: UIButton) {
+//        let postRef = Firestore.firestore().collection("posts")
+//
+//        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
+//            let sfDocument: DocumentSnapshot
+//        }, completion: <#(Any?, Error?) -> Void#>)
+//    }
+    
+    
+//    @IBAction func pushedButton1(sender: UIButton) {
+//        //UITableView内の座標に変換
+//        let point = homeTableView.convert(sender.center, from: sender)
+//        print(point)
+//        //座標からindexPathを取得
+//        if let indexPath = homeTableView.indexPathForRow(at: point) {
+//            print(indexPath.row)
+//        } else {
+//            //ここには来ないはず
+//            print("not found...")
 //        }
-
+//    }
+//
+//    @IBAction func pushedButton2(sender: UIButton) {
+//        //UITableView内の座標に変換
+//        let point = homeTableView.convert(sender.center, from: sender)
+//        print(point)
+//        //座標からindexPathを取得
+//        if let indexPath = homeTableView.indexPathForRow(at: point) {
+//            print(indexPath.row)
+//        } else {
+//            //ここには来ないはず
+//            print("not found...")
+//        }
+//    }
 }
+
+extension HomeViewController: CustomCellDelegate {
+    func didTapOption1Button(sender: UIButton, cell: PostTableViewCell) {
+        print("tapped option1Button", sender.tag)
+        sender.backgroundColor = UIColor.rgb(red: 46, green: 185, blue: 203)
+        sender.tintColor = UIColor.white
+        let buttonTag = sender.tag
+        guard let button2tintColor = cell.option2Button.viewWithTag(buttonTag)?.tintColor else { return }
+        changeButtonColor(tintColer: button2tintColor, targetOptionButton: cell.option2Button, buttonTag: buttonTag)
+    }
+    
+    func didTapOption2Button(sender: UIButton, cell: PostTableViewCell) {
+        print("tapped option2Button", sender.tag)
+        sender.backgroundColor = UIColor.rgb(red: 46, green: 185, blue: 203)
+        sender.tintColor = UIColor.white
+        let buttonTag = sender.tag
+        guard let button1tintColor = cell.option1Button.viewWithTag(buttonTag)?.tintColor else { return }
+        changeButtonColor(tintColer: button1tintColor, targetOptionButton: cell.option1Button, buttonTag: buttonTag)
+    }
+    
+    private func changeButtonColor(tintColer: UIColor, targetOptionButton: UIButton, buttonTag: Int) {
+        if tintColer == UIColor.white {
+            targetOptionButton.viewWithTag(buttonTag)?.backgroundColor = nil
+            targetOptionButton.viewWithTag(buttonTag)?.tintColor = UIColor.rgb(red: 46, green: 185, blue: 203)
+        }
+    }
+    
+    private func updateCountResult(buttonTag: Int, tappedButtonIndex: Int, totalOptionsNum: Int) {
+        let postUid = self.postArray[buttonTag].uid
+        // 更新するPostのDocumentReference
+        let postReference: DocumentReference = Firestore.firestore().collection("Post").document(postUid)
+        
+        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
+            do {
+                // 更新するCoupon
+                let document: DocumentSnapshot = try transaction.getDocument(postReference)
+                let data = Post(document: document as! QueryDocumentSnapshot)
+                // クーポンを使用したUserに付与するポイントをCouponから取得する
+                let countResult: Int = data.countResult[tappedButtonIndex]
+
+                // 更新するUser
+                let user: DocumentSnapshot = try transaction.getDocument(userReference)
+                // ユーザーが現在持っているポイントをUserから取得する
+                let toPoint: Int = userSnapshot.data()!["point"] as? Int ?? 0
+
+                // Userの持っているポイントにCouponのポイントを加算して更新する
+                transaction.setData(["point" : toPoint + point], forDocument: userReference, merge: true)
+
+                // CouponのUsersに使用したUserを保存する
+                transaction.setData(userSnapshot.data()!, forDocument: usersReference, merge: true)
+            } catch (let error) {
+                print(error)
+            }
+            return nil
+        }, completion: { (_, error)  in
+            if let error = error {
+                print(error)
+                return
+            }
+        })
+    }
+}
+
+
